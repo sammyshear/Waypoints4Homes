@@ -32,11 +32,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: mc-publish
-      uses: Kir-Antipov/mc-publish@v3.3
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.4.4
       with:
-          # Only include this section if you wish to publish
-          # your assets on Modrinth.
-          modrinth-id: pYBEpvz9
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          java-version: 17
+    - name: Publish to Modrinth
+      uses: puredevops/sample-action@v1.3
+      with:
+        arguments: modrinth
 
+          
