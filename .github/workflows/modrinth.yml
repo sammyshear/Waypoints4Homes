@@ -39,6 +39,6 @@ jobs:
     - name: Publish to Modrinth
       run: ./gradlew modrinth
       env:
-        MODRINTH_TOKEN: ${{ secrets.MODRINTH }}
+        MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
 
           
