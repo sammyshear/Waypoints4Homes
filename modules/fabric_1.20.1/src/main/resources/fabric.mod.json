@@ -13,6 +13,7 @@
   },
   "license": "CC0-1.0",
   "environment": "client",
+  "icon": "assets/way4homes/icon.png",
   "entrypoints": {
     "main": [
       "dev.sshear.way4homes.fabric.Way4Homes"

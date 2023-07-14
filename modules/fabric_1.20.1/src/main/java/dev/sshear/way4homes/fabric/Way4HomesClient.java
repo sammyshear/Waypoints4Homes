@@ -24,7 +24,6 @@ public class Way4HomesClient implements ClientModInitializer {
 		Way4Homes.LOGGER.info("Init for Way4Homes on this client");
 		Way4Homes.LOGGER.info(String.valueOf(ClientPlayNetworking.registerGlobalReceiver(new Identifier("way4homes", "packet"),
 				(client, handler, buf, resSender) -> {
-					Way4Homes.LOGGER.debug("received packet with home data " + buf);
 					ByteArrayDataInput in = ByteStreams.newDataInput(buf.getWrittenBytes());
 					Home home;
 					if (in.readUTF().equals("NEW HOME")) {
@@ -35,7 +34,7 @@ public class Way4HomesClient implements ClientModInitializer {
 							homes.put(home.getName(), home);
 							syncWaypoints();
 						});
-					} else if (in.readUTF().equals("DEL HOME")) {
+					} else {
 						home = new Home(in.readInt(), in.readInt(), in.readInt(), in.readUTF());
 						client.execute(() -> {
 							homes.remove(home.getName());

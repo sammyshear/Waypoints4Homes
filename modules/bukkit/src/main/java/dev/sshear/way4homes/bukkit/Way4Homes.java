@@ -45,10 +45,10 @@ public final class Way4Homes extends JavaPlugin implements Listener {
 			out.writeUTF(home.getName());
 			out.writeInt(home.getName().length());
 			owner.getBase().sendPluginMessage(this, "way4homes:packet", out.toByteArray());
-			LOGGER.info("sent packet with " + owner + " " + newLoc + " " + name);
+			LOGGER.info("sent home packet with " + owner + " " + newLoc + " " + name);
 		} else {
 			var oldLoc = event.getOldLocation();
-			var home = new Home(oldLoc.getBlockX(), oldLoc.getBlockY(), oldLoc.getBlockZ(), name);
+			var home = new Home(oldLoc.getBlockX(), oldLoc.getBlockY(), oldLoc.getBlockZ(), event.getOldName());
 			ByteArrayDataOutput out = ByteStreams.newDataOutput();
 			out.writeUTF("DEL HOME");
 			out.writeInt(home.getX());
@@ -57,7 +57,7 @@ public final class Way4Homes extends JavaPlugin implements Listener {
 			out.writeUTF(home.getName());
 			out.writeInt(home.getName().length());
 			owner.getBase().sendPluginMessage(this, "way4homes:packet", out.toByteArray());
-			LOGGER.info("sent delhome packet for " + name);
+			LOGGER.info("sent delhome packet for " + event.getOldName());
 		}
 	}
 }

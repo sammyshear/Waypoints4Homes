@@ -80,24 +80,17 @@ java {
 }
 
 jar {
-	from("LICENSE") {
-		rename { "${it}_${project.base.archivesName.get()}"}
-	}
 	archiveBaseName = "Waystones-For-Homes_FABRIC"
 }
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
+modrinth {
+	token = System.getenv("MODRINTH_TOKEN") // This is the default. Remember to have the MODRINTH_TOKEN environment variable set or else this will fail, or set it to whatever you want - just make sure it stays private!
+	projectId = "waypoints-for-homes" // This can be the project ID or the slug. Either will work!
+	versionType = "release" // This is the default -- can also be `beta` or `alpha`
+	uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
+	gameVersions = ["1.20.1"] // Must be an array, even with only one version
+	loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
+	dependencies { // A special DSL for creating dependencies
+		required.project "fabric-api" // Creates a new required dependency on Fabric API
+		required.project "xaeros-minimap"
 	}
 }
