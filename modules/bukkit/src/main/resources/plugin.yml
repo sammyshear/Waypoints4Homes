@@ -1,0 +1,5 @@
+name: "Waypoints4Homes"
+version: '${version}'
+main: dev.sshear.way4homes.bukkit.Way4Homes
+api-version: '1.20'
+load: STARTUP
