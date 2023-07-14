@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id "com.modrinth.minotaur" version "2.+"
+    id("io.papermc.paperweight.userdev") version "1.5.5"
+    id("xyz.jpenilla.run-paper") version "2.1.0" // Adds runServer and runMojangMappedServer tasks for testing
 }
 
 group = 'dev.sshear.way4homes'
@@ -15,10 +18,15 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven { url = "https://repo.essentialsx.net/releases/" }
+    maven { url = "https://repo.dmulloy2.net/repository/public/" }
+    maven { url = "https://repo.bytecode.space/repository/maven-public" }
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT"
+    compileOnly "net.essentialsx:EssentialsX:2.20.0"
+    compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0'
+    paperweight.paperDevBundle("1.20.1-R0.1-SNAPSHOT")
 }
 
 def targetJavaVersion = 17
@@ -43,5 +51,16 @@ processResources {
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
         expand props
+    }
+}
+
+jar {
+    archiveBaseName = "Waystones-For-Homes_BUKKIT";
+}
+
+tasks {
+    // Configure reobfJar to run when invoking the build task
+    assemble {
+        dependsOn(reobfJar)
     }
 }

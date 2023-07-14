@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2023 - sashiro
+Copyright (c) 2023 - sammyshear
 
 ---
 

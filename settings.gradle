@@ -20,5 +20,4 @@ plugins {
 rootProject.name = 'Waypoints for Homes'
 
 include "modules:fabric_1.20.1"
-include "modules:common"
 include "modules:bukkit"
