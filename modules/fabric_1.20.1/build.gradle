@@ -93,4 +93,5 @@ modrinth {
 		required.project "fabric-api" // Creates a new required dependency on Fabric API
 		required.project "xaeros-minimap"
 	}
+	syncBodyFrom = rootProject.file("README.md").text
 }
