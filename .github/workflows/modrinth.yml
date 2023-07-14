@@ -37,8 +37,8 @@ jobs:
       with:
           java-version: 17
     - name: Publish to Modrinth
-      uses: puredevops/sample-action@v1.3
-      with:
-        arguments: modrinth
+      run: ./gradlew modrinth
+      env:
+        MODRINTH_TOKEN: ${{ secrets.MODRINTH }}
 
           
