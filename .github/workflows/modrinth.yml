@@ -9,7 +9,7 @@ name: Publish to Modrinth
 
 on:
   release:
-    types: [published]
+    types: [published, released, created, edited]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -38,6 +38,10 @@ jobs:
           java-version: 17
     - name: Publish to Modrinth
       run: ./gradlew modrinth
+      env:
+        MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+    - name: Sync README Body
+      run: ./gradlew modrinthSyncBody
       env:
         MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
 
