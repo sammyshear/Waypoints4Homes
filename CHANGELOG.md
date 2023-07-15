@@ -1,4 +1,3 @@
-# Changelog v1.0.5
+# Changelog v1.0.6
 
-- Fixed build system to be truly automatic.
-- Cleaned up bukkit plugin
+- Fixed bukkit plugin build upload error
