@@ -7,6 +7,11 @@ plugins {
 
 group = 'dev.sshear.way4homes'
 version = project.mainVersion
+archivesBaseName = "Waypoints-For-Homes_BUKKIT"
+
+base {
+    archivesName = "Waypoints-For-Homes_BUKKIT"
+}
 
 repositories {
     mavenCentral()

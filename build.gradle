@@ -6,8 +6,6 @@ plugins {
 subprojects {
     apply plugin: "java"
     apply plugin: "idea"
-    java.withSourcesJar()
-    java.withJavadocJar()
 
     repositories {
         mavenCentral()
@@ -23,9 +21,8 @@ tasks.register("publishAll", GradleBuild) {
     tasks = [
             "modules:fabric_1.20.1:clean",
             "modules:bukkit:clean",
-            "modules:fabric:modrinth",
-            "modules:fabric:modUpdate",
-            "modules:bukkit:shadowJar"
+            "modules:fabric_1.20.1:modrinth",
+            "modules:bukkit:modrinth",
     ]
 }
 tasks.register("buildAll", GradleBuild) {

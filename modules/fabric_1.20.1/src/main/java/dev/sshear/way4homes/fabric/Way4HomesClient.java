@@ -22,7 +22,8 @@ public class Way4HomesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		Way4Homes.LOGGER.info("Init for Way4Homes on this client");
-		Way4Homes.LOGGER.info(String.valueOf(ClientPlayNetworking.registerGlobalReceiver(new Identifier("way4homes", "packet"),
+		Way4Homes.LOGGER.info(String.valueOf(
+				ClientPlayNetworking.registerGlobalReceiver(new Identifier("way4homes", "packet"),
 				(client, handler, buf, resSender) -> {
 					ByteArrayDataInput in = ByteStreams.newDataInput(buf.getWrittenBytes());
 					Home home;
