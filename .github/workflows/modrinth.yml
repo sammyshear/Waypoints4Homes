@@ -8,19 +8,9 @@
 name: Publish to Modrinth
 
 on:
-  release:
-    types: [published, released, created, edited]
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-        - info
-        - warning
-        - debug
+  push:
+    tags:
+      - "v*.*.*"
 
 permissions:
   contents: read
@@ -37,11 +27,7 @@ jobs:
       with:
           java-version: 17
     - name: Publish to Modrinth
-      run: ./gradlew modrinth
-      env:
-        MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-    - name: Sync README Body
-      run: ./gradlew modrinthSyncBody
+      run: ./gradlew publishAll
       env:
         MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
 

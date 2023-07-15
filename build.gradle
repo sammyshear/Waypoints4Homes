@@ -23,6 +23,7 @@ tasks.register("publishAll", GradleBuild) {
             "modules:bukkit:clean",
             "modules:fabric_1.20.1:modrinth",
             "modules:bukkit:modrinth",
+            "modules:bukkit:modrinthSyncBody"
     ]
 }
 tasks.register("buildAll", GradleBuild) {
