@@ -1,3 +1,3 @@
-# Changelog v1.0.6
+# Changelog v1.0.7
 
-- Fixed bukkit plugin build upload error
+- Fixed licensing info for Fabric mod
