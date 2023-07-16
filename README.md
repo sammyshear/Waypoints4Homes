@@ -5,7 +5,7 @@
 [![Publish to Modrinth](https://github.com/sammyshear/Waypoints4Homes/actions/workflows/modrinth.yml/badge.svg)](https://github.com/sammyshear/Waypoints4Homes/actions/workflows/modrinth.yml)
 [![Release on Github](https://github.com/sammyshear/Waypoints4Homes/actions/workflows/github-release.yml/badge.svg)](https://github.com/sammyshear/Waypoints4Homes/actions/workflows/github-release.yml)
 
-![Static Badge](https://img.shields.io/badge/Kofi-Support%20me?style=flat&logo=kofi&color=blue&link=https%3A%2F%2Fko-fi.com%2Fsammyshear)
+[![Static Badge](https://img.shields.io/badge/Kofi-Support%20me?style=flat&logo=kofi&color=blue&link=https%3A%2F%2Fko-fi.com%2Fsammyshear)](https://ko-fi.com/sammyshear)
 
 
 This is a mod/plugin combination that automatically creates and updates Xaero's minimap waypoints from EssentialsX homes.
