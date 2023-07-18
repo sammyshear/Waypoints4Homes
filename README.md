@@ -1,4 +1,4 @@
-# Waypoints to Homes
+# Waypoints for Homes
 
 ![Modrinth Downloads](https://img.shields.io/modrinth/dt/waypoints-for-homes?style=for-the-badge&logo=modrinth&label=Downloads)
 

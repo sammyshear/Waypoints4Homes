@@ -20,6 +20,9 @@
     ],
     "client": [
       "dev.sshear.way4homes.fabric.Way4HomesClient"
+    ],
+    "journeymap": [
+      "dev.sshear.way4homes.fabric.jmap.JmapPlugin"
     ]
   },
   "mixins": [

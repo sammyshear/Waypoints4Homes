@@ -4,6 +4,7 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import xaero.common.XaeroMinimapSession;
 import xaero.common.minimap.waypoints.Waypoint;
@@ -22,37 +23,39 @@ public class Way4HomesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		Way4Homes.LOGGER.info("Init for Way4Homes on this client");
-		Way4Homes.LOGGER.info(String.valueOf(
-				ClientPlayNetworking.registerGlobalReceiver(new Identifier("way4homes", "packet"),
-				(client, handler, buf, resSender) -> {
-					ByteArrayDataInput in = ByteStreams.newDataInput(buf.getWrittenBytes());
-					Home home;
-					if (in.readUTF().equals("NEW HOME")) {
-						home = new Home(
-								in.readInt(), in.readInt(), in.readInt(),
-								in.readUTF());
-						client.execute(() -> {
-							homes.put(home.getName(), home);
-							syncWaypoints();
-						});
-					} else {
-						home = new Home(in.readInt(), in.readInt(), in.readInt(), in.readUTF());
-						client.execute(() -> {
-							homes.remove(home.getName());
-							delHomes.put(home.getName(), home);
-							syncDelWaypoints();
-						});
-					}
-				}
-		)));
+		if (FabricLoader.getInstance().isModLoaded("xaerominimap")) {
+			Way4Homes.LOGGER.info("hooking into xaeros");
+			ClientPlayNetworking.registerGlobalReceiver(new Identifier("way4homes", "packet"),
+					(client, handler, buf, resSender) -> {
+						ByteArrayDataInput in = ByteStreams.newDataInput(buf.getWrittenBytes());
+						Home home;
+						if (in.readUTF().equals("NEW HOME")) {
+							home = new Home(in.readInt(), in.readInt(), in.readInt(), in.readUTF());
+							client.execute(() -> {
+								homes.put(home.getName(), home);
+								syncWaypoints();
+							});
+						} else {
+							home = new Home(in.readInt(), in.readInt(), in.readInt(), in.readUTF());
+							client.execute(() -> {
+								homes.remove(home.getName());
+								delHomes.put(home.getName(), home);
+								syncDelWaypoints();
+							});
+						}
+					});
+		}
 	}
 
-	private void syncDelWaypoints() {
-		for (Home home : delHomes.values()) {
+	private void syncWaypoints() {
+		for (Home home : homes.values()) {
 			XaeroMinimapSession session = XaeroMinimapSession.getCurrentSession();
 			var mgr = session.getWaypointsManager();
 			WaypointSet set = mgr.getCurrentWorld().getCurrentSet();
 			set.getList().removeIf((way) -> way.getName().equals(home.getName()));
+			var waypoint = new Waypoint(home.getX(), home.getY(), home.getZ(), home.getName(),
+					home.getName().toUpperCase().substring(0, 1), 4, 0, false);
+			set.getList().add(waypoint);
 			try {
 				XaeroMinimap.instance.getSettings().saveAllWaypoints(mgr);
 			} catch (IOException e) {
@@ -61,16 +64,12 @@ public class Way4HomesClient implements ClientModInitializer {
 		}
 	}
 
-	void syncWaypoints() {
-
-		for (Home home : homes.values()) {
+	private void syncDelWaypoints() {
+		for (Home home : delHomes.values()) {
 			XaeroMinimapSession session = XaeroMinimapSession.getCurrentSession();
 			var mgr = session.getWaypointsManager();
 			WaypointSet set = mgr.getCurrentWorld().getCurrentSet();
 			set.getList().removeIf((way) -> way.getName().equals(home.getName()));
-			var waypoint =  new Waypoint(home.getX(), home.getY(), home.getZ(), home.getName(),
-					home.getName().toUpperCase().substring(0, 0), 4, 0, false);
-			set.getList().add(waypoint);
 			try {
 				XaeroMinimap.instance.getSettings().saveAllWaypoints(mgr);
 			} catch (IOException e) {
