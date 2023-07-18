@@ -1,3 +1,4 @@
-# Changelog v1.0.7
+# Changelog v1.0.8
 
-- Fixed licensing info for Fabric mod
+- Added support for the HuskHomes plugin
+- Added support for Journeymap's waypoints
