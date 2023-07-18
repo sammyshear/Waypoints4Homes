@@ -8,7 +8,7 @@
 [![Static Badge](https://img.shields.io/badge/Kofi-Support%20me?style=flat&logo=kofi&color=blue&link=https%3A%2F%2Fko-fi.com%2Fsammyshear)](https://ko-fi.com/sammyshear)
 
 
-This is a mod/plugin combination that automatically creates and updates Xaero's minimap waypoints from EssentialsX homes.
+This is a mod/plugin combination that automatically creates and updates Xaero's Minimap or JourneyMap waypoints from EssentialsX or HuskHomes homes.
 
 
 ## Install
