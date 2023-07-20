@@ -1,4 +1,4 @@
-# Changelog v1.0.8
+# Changelog v1.0.9
 
-- Added support for the HuskHomes plugin
-- Added support for Journeymap's waypoints
+- Fixed breaking bug with EssentialsX not working due to HuskHomes support
+- Changed the way the bukkit config is created.

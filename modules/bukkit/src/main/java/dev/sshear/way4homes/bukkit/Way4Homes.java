@@ -26,17 +26,21 @@ public final class Way4Homes extends JavaPlugin implements Listener {
 		} else {
 			config.addDefault("HuskHomes", false);
 		}
+		if (getServer().getPluginManager().getPlugin("EssentialsX") != null) {
+			config.addDefault("EssentialsX", true);
+			if (getConfig().getBoolean("EssentialsX"))
+				LOGGER.info("Way4Homes setup detected Essentials, enabling in config");
+		} else {
+			config.addDefault("EssentialsX", false);
+		}
 		config.options().copyDefaults(true);
 		saveConfig();
 		Bukkit.getMessenger().registerOutgoingPluginChannel(this, "way4homes:packet");
-		if ((getServer().getPluginManager().getPlugin("EssentialsX") != null &&
-				this.getConfig().getBoolean("EssentialsX")) &&
-				 !this.getConfig().getBoolean("HuskHomes")) {
+		if (this.getConfig().getBoolean("EssentialsX") &&
+						!this.getConfig().getBoolean("HuskHomes")) {
 			LOGGER.info("hooking into essentialsx");
 			getServer().getPluginManager().registerEvents(new EssentialsListener(), this);
-		}
-		else if (getServer().getPluginManager().getPlugin("HuskHomes") != null &&
-				this.getConfig().getBoolean("HuskHomes")) {
+		} else if (this.getConfig().getBoolean("HuskHomes")) {
 			LOGGER.info("hooking into huskhomes");
 			getServer().getPluginManager().registerEvents(new HuskHomesListener(), this);
 		}
